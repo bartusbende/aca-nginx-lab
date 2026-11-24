@@ -31,19 +31,14 @@ jobs:
           tenant-id: ${{ secrets.ACANGINXSTANDARDR1E4BW_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.ACANGINXSTANDARDR1E4BW_AZURE_SUBSCRIPTION_ID }}
 
-      - name: Build and push container image to registry
+      - name: Build and deploy container
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
-          _dockerfilePathKey_: _dockerfilePath_
-          _targetLabelKey_: _targetLabel_
+          dockerfilePath: Dockerfile
           registryUrl: docker.io
           registryUsername: ${{ secrets.ACANGINXSTANDARDR1E4BW_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.ACANGINXSTANDARDR1E4BW_REGISTRY_PASSWORD }}
           containerAppName: aca-nginx-standard-r1e4bw
           resourceGroup: rg-aca-lab-R1E4BW
           imageToBuild: bartusbende/aca-nginx-standard-r1e4bw:${{ github.sha }}
-          _buildArgumentsKey_: |
-            _buildArgumentsValues_
-
-
